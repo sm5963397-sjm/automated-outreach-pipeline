@@ -1,0 +1,36 @@
+[project]
+name = "outreach-pipeline"
+version = "1.0.0"
+description = "Automated company discovery, decision-maker lookup, AI email generation, and Brevo sending pipeline."
+requires-python = ">=3.12"
+readme = "README.md"
+
+[project.scripts]
+outreach = "app.cli.main:cli"
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "C4"]
+ignore = ["B008"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = []
+ignore_missing_imports = true
+exclude = ["migrations/", "app/tests/"]
+
+[tool.pytest.ini_options]
+addopts = "-q --cov=app --cov-report=term-missing --cov-fail-under=80"
+testpaths = ["app/tests"]
+filterwarnings = [
+    "error",
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated:starlette.exceptions.StarletteDeprecationWarning",
+]
