@@ -4,6 +4,16 @@ Production-ready FastAPI and Typer service for automated B2B outreach.
 
 Input a company domain such as `openai.com`. The system finds similar companies with Ocean.io, finds decision makers with Prospeo, resolves verified emails with Eazyreach, generates short personalized emails with OpenAI, sends through Brevo after approval, and tracks everything in PostgreSQL.
 
+## Live Links
+
+- Production API: https://automated-outreach-pipeline.vercel.app
+- Swagger docs: https://automated-outreach-pipeline.vercel.app/docs
+- Health check: https://automated-outreach-pipeline.vercel.app/health
+- GitHub repository: https://github.com/sm5963397-sjm/automated-outreach-pipeline
+- Final deployment report: `docs/Automated_Outreach_Pipeline_Final_Deployment_Report.pdf`
+
+The Vercel deployment is a serverless API/docs deployment. Full campaign execution still requires production PostgreSQL, Redis/Celery worker hosting, provider API keys, and Brevo sender-domain configuration.
+
 ## Architecture
 
 ```mermaid
