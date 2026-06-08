@@ -78,14 +78,18 @@ def setup_logging(settings: Settings) -> None:
     console_handler.setFormatter(formatter)
     root.addHandler(console_handler)
 
-    file_handler = RotatingFileHandler(
-        log_dir / settings.LOG_FILE,
-        maxBytes=10 * 1024 * 1024,
-        backupCount=5,
-        encoding="utf-8",
-    )
-    file_handler.setFormatter(formatter)
-    root.addHandler(file_handler)
+    try:
+        file_handler = RotatingFileHandler(
+            log_dir / settings.LOG_FILE,
+            maxBytes=10 * 1024 * 1024,
+            backupCount=5,
+            encoding="utf-8",
+        )
+    except OSError:
+        root.warning("file_logging_disabled", extra={"log_dir": str(log_dir)})
+    else:
+        file_handler.setFormatter(formatter)
+        root.addHandler(file_handler)
 
     logging.getLogger("httpx").setLevel(logging.WARNING)
     logging.getLogger("uvicorn.access").setLevel(logging.WARNING)
