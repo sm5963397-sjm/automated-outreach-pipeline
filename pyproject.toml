@@ -6,6 +6,7 @@ requires-python = ">=3.12"
 readme = "README.md"
 
 [project.scripts]
+app = "app.main:app"
 outreach = "app.cli.main:cli"
 
 [tool.black]

@@ -19,6 +19,16 @@ app.add_middleware(RequestContextMiddleware)
 app.include_router(api_router, prefix=settings.API_PREFIX)
 
 
+@app.get("/", tags=["health"])
+def root() -> dict[str, str]:
+    return {
+        "name": settings.APP_NAME,
+        "status": "online",
+        "docs": "/docs",
+        "health": "/health",
+    }
+
+
 @app.get("/health", tags=["health"])
 def health() -> dict[str, str]:
     return {"status": "ok"}
